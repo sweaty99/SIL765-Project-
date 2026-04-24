@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TLS Negotiation Visualizer (Educational)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div>
+        <h1>TLS Negotiation Visualizer</h1>
+        <p class="lead">Interactive simulation of ClientHello / ServerHello negotiation. Educational only.</p>
+      </div>
+      <div class="meta">Demo UI • Local only</div>
+    </header>
+
+    <section class="controls-panel">
+      <div class="controls-row">
+        <label for="mode">Server mode</label>
+        <select id="mode">
+          <option value="modern">Modern (prefers TLS 1.2+)</option>
+          <option value="legacy">Legacy (selects TLS 1.0 if offered)</option>
+        </select>
+
+        <label for="attacker" class="attacker-label">Simulate attacker</label>
+        <input type="checkbox" id="attacker" />
+
+        <label for="speed">Speed</label>
+        <input id="speed" type="range" min="200" max="1200" value="600" />
+
+        <button id="run">Simulate</button>
+        <button id="reset">Reset</button>
+      </div>
+
+      <div class="controls-row">
+        <fieldset>
+          <legend>Client offered versions</legend>
+          <label><input type="checkbox" class="ver" value="TLS 1.3" checked /> TLS 1.3</label>
+          <label><input type="checkbox" class="ver" value="TLS 1.2" checked /> TLS 1.2</label>
+          <label><input type="checkbox" class="ver" value="TLS 1.1" /> TLS 1.1</label>
+          <label><input type="checkbox" class="ver" value="TLS 1.0" /> TLS 1.0</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Cipher preferences</legend>
+          <label><input type="checkbox" class="cipher" value="AES-GCM" checked /> AES-GCM</label>
+          <label><input type="checkbox" class="cipher" value="CHACHA20" checked /> ChaCha20-Poly1305</label>
+          <label><input type="checkbox" class="cipher" value="3DES" /> 3DES</label>
+        </fieldset>
+      </div>
+    </section>
+
+    <main class="visual">
+      <div id="flow" class="flow">
+        <!-- animated timeline -->
+      </div>
+
+      <aside class="sidebar">
+        <div id="result" class="result"></div>
+        <div class="logs">
+          <div class="logs-header">Logs <button id="copyLogs">Copy</button></div>
+          <pre id="logArea" class="logArea"></pre>
+        </div>
+      </aside>
+    </main>
+
+    <p class="notes">This UI simulates negotiation steps; it does not perform real TLS or attacks.</p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
